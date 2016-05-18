@@ -31,4 +31,5 @@ public class RSSFeed implements Serializable{
         this.channel = channel;
     }
 
+
 }

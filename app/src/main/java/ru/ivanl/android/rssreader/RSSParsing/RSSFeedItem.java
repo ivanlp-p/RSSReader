@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Created by Ivan on 17.05.2016.
  */
-@Root(name = "feedItem", strict = false)
+@Root(name = "item", strict = false)
 public class RSSFeedItem implements Serializable {
 
     @Element(name = "guid")

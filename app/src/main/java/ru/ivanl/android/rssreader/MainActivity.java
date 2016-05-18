@@ -12,6 +12,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import ru.ivanl.android.rssreader.Adapters.RSSAdapter;
@@ -55,6 +58,23 @@ public class MainActivity extends AppCompatActivity {
 
     @Nullable
     private List<RSSFeedItem> requestRSSData() throws IOException {
-        return rssService.getRSSData().execute().body();
+
+        List<RSSFeedItem> itemList = new ArrayList<>();
+        Call<RSSFeed> call = rssService.getRSSData();
+        call.enqueue(new Callback<RSSFeed>() {
+            @Override
+            public void onResponse(Call<RSSFeed> call, Response<RSSFeed> response) {
+
+                response.body().getChannel();
+
+            }
+
+            @Override
+            public void onFailure(Call<RSSFeed> call, Throwable t) {
+
+            }
+        });
+
+        return itemList;
     }
 }
