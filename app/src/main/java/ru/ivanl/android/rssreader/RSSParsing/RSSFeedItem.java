@@ -1,12 +1,14 @@
 package ru.ivanl.android.rssreader.RSSParsing;
 
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
 
 /**
  * Created by Ivan on 17.05.2016.
  */
+@Root(name = "feedItem", strict = false)
 public class RSSFeedItem implements Serializable {
 
     @Element(name = "guid")

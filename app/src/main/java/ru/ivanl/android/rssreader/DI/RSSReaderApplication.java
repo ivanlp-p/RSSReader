@@ -15,6 +15,7 @@ public class RSSReaderApplication extends Application {
 
         appComponent = DaggerAppComponent.builder()
                 .rSSDataModule(new RSSDataModule())
+                .appModule(new AppModule(this))
                 .build();
     }
 

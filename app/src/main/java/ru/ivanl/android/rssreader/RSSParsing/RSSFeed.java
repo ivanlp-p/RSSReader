@@ -1,10 +1,14 @@
 package ru.ivanl.android.rssreader.RSSParsing;
 
+import android.support.annotation.Nullable;
+
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.nio.channels.Channel;
+import java.util.List;
 
 /**
  * Created by User on 18.05.2016.
@@ -26,4 +30,5 @@ public class RSSFeed implements Serializable{
     public RSSFeed(Channel channel) {
         this.channel = channel;
     }
+
 }

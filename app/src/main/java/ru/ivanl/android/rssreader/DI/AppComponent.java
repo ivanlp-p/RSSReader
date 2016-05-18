@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import ru.ivanl.android.rssreader.Adapters.RSSAdapter;
 import ru.ivanl.android.rssreader.MainActivity;
+import ru.ivanl.android.rssreader.RSSParsing.RSSFeed;
 
 /**
  * Created by Ivan on 17.05.2016.
@@ -13,5 +14,5 @@ import ru.ivanl.android.rssreader.MainActivity;
 @Component(modules={RSSDataModule.class, AppModule.class})
 public interface AppComponent {
     void inject(MainActivity obj);
-    void inject(RSSAdapter obj);
+
 }
