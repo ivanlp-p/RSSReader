@@ -1,16 +1,24 @@
 package ru.ivanl.android.rssreader.RSSParsing;
 
+import org.simpleframework.xml.Element;
+
+import java.io.Serializable;
+
 /**
  * Created by Ivan on 17.05.2016.
  */
-public class RSSObject {
+public class RSSFeedItem implements Serializable {
 
+    @Element(name = "guid")
     private String guid;
+    @Element(name = "title")
     private String title;
+    @Element(name = "imageNews")
     private String imageNews;
+    @Element(name = "description")
     private String description;
 
-    public RSSObject(String guid, String title, String imageNews, String description) {
+    public RSSFeedItem(String guid, String title, String imageNews, String description) {
         this.guid = guid;
         this.title = title;
         this.imageNews = imageNews;

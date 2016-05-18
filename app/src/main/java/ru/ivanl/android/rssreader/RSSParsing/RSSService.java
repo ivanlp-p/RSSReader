@@ -18,6 +18,6 @@ public interface RSSService {
     int TIMEOUT = 60;
 
     @GET(URL_PATH)
-    Call<List<RSSObject>> getRSSData();
+    Call<List<RSSFeedItem>> getRSSData();
 
 }
