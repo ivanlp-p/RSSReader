@@ -1,7 +1,9 @@
 package ru.ivanl.android.rssreader.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import ru.ivanl.android.rssreader.MainActivity;
 import ru.ivanl.android.rssreader.R;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
 
@@ -50,13 +53,18 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
     public void onBindViewHolder(RSSHolder holder, int position) {
         RSSFeedItem currentItem = itemList.get(position);
 
-        guid = currentItem.getGuid();
-        Picasso.with(context).load(currentItem.getImageNews()).fit().into(holder.imageNews);
+        String url = currentItem.getEnclosure().getUrl();
+        Log.d("happy", url);
+        //holder.imageNews.setImageURI(Uri.parse(url));
+        Picasso.with(holder.imageNews.getContext()).load("https://icdn.lenta.ru/images/2016/05/20/13/20160520131651734/pic_078a0919ab34c03ba66e1fa61fa836ca.jpg").into(holder.imageNews);
         holder.title.setText(currentItem.getTitle());
     }
 
     @Override
     public int getItemCount() {
+        if (itemList == null){
+            return 0;
+        }
         return itemList.size();
     }
 

@@ -58,21 +58,21 @@ public class MainActivity extends AppCompatActivity {
 
                 newsItem = rssFeed.getChannel().getFeedItems();
                 Log.d("happy", "Bode size:" + newsItem.size());
+                adapter = new RSSAdapter(newsItem);
 
+                recyclerView.setAdapter(adapter);
 
             }
 
             @Override
             public void onFailure(Call<RSSFeed> call, Throwable t) {
-                Log.d("happy", "This is onFailure");
+                Log.d("happy", t.getMessage());
             }
         });
 
 
 
-        adapter = new RSSAdapter(newsItem);
 
-        recyclerView.setAdapter(adapter);
 
 
     }
