@@ -1,5 +1,6 @@
 package ru.ivanl.android.rssreader.RSSParsing;
 
+import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
@@ -15,15 +16,18 @@ public class RSSFeedItem implements Serializable {
     private String guid;
     @Element(name = "title")
     private String title;
-    @Element(name = "imageNews")
-    private String imageNews;
+    @Element(name = "enclosure")
+    private Enclosure enclosure;
     @Element(name = "description")
     private String description;
 
-    public RSSFeedItem(String guid, String title, String imageNews, String description) {
+    public RSSFeedItem() {
+    }
+
+    public RSSFeedItem(String guid, String title, Enclosure enclosure, String description) {
         this.guid = guid;
         this.title = title;
-        this.imageNews = imageNews;
+        this.enclosure = enclosure;
         this.description = description;
     }
 
@@ -35,11 +39,29 @@ public class RSSFeedItem implements Serializable {
         return title;
     }
 
-    public String getImageNews() {
-        return imageNews;
+    public Enclosure getEnclosure() {
+        return enclosure;
     }
 
     public String getDescription() {
         return description;
+    }
+
+
+    public class Enclosure implements Serializable {
+
+        @Attribute(name = "url")
+        private String url;
+
+        public Enclosure() {
+        }
+
+        public Enclosure(String url) {
+            this.url = url;
+        }
+
+        public String getUrl() {
+            return url;
+        }
     }
 }
