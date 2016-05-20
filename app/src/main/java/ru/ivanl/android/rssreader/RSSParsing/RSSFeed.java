@@ -17,9 +17,9 @@ import java.util.List;
 public class RSSFeed implements Serializable{
 
     @Element(name = "channel")
-    private Channel channel;
+    public RSSChannel channel;
 
-    public Channel getChannel() {
+    public RSSChannel getChannel() {
         return channel;
     }
 
@@ -27,7 +27,7 @@ public class RSSFeed implements Serializable{
     public RSSFeed() {
     }
 
-    public RSSFeed(Channel channel) {
+    public RSSFeed(RSSChannel channel) {
         this.channel = channel;
     }
 

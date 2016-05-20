@@ -4,6 +4,7 @@ import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Root;
 
 import java.io.Serializable;
+import java.nio.channels.Channel;
 
 /**
  * Created by Ivan on 17.05.2016.
@@ -15,7 +16,7 @@ public class RSSFeedItem implements Serializable {
     private String guid;
     @Element(name = "title")
     private String title;
-    @Element(name = "imageNews")
+    @Element(name = "link")
     private String imageNews;
     @Element(name = "description")
     private String description;

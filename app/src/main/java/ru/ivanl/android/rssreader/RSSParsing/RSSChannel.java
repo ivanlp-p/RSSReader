@@ -12,7 +12,7 @@ import java.util.List;
 @Root(name = "channel", strict = false)
 public class RSSChannel implements Serializable {
     @ElementList(inline = true, name = "item")
-    private List<RSSFeedItem> feedItems;
+    public List<RSSFeedItem> feedItems;
 
     public List<RSSFeedItem> getFeedItems() {
         return feedItems;
