@@ -1,7 +1,7 @@
 package ru.ivanl.android.rssreader.Adapters;
 
 import android.content.Context;
-import android.net.Uri;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +16,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import ru.ivanl.android.rssreader.MainActivity;
+import ru.ivanl.android.rssreader.DI.RSSReaderApplication;
+import ru.ivanl.android.rssreader.DetailActivity;
 import ru.ivanl.android.rssreader.R;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
 
@@ -29,13 +30,19 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
     Context context;
 
     private List<RSSFeedItem> itemList;
+    private RSSFeedItem detailItem;
     private LayoutInflater inflater;
 
     String guid;
 
-    public RSSAdapter(List<RSSFeedItem> itemList) {
+    public RSSAdapter(List<RSSFeedItem> itemList, Context context) {
+
+        ((RSSReaderApplication) context.getApplicationContext()).getAppComponent().inject(this);
         this.itemList = itemList;
+        this.context = context;
     }
+
+
 
     @Override
     public RSSHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -52,11 +59,18 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
     @Override
     public void onBindViewHolder(RSSHolder holder, int position) {
         RSSFeedItem currentItem = itemList.get(position);
+        String url = "";
 
-        String url = currentItem.getEnclosure().getUrl();
-        Log.d("happy", url);
-        //holder.imageNews.setImageURI(Uri.parse(url));
-        Picasso.with(holder.imageNews.getContext()).load("https://icdn.lenta.ru/images/2016/05/20/13/20160520131651734/pic_078a0919ab34c03ba66e1fa61fa836ca.jpg").into(holder.imageNews);
+        try{
+            url = currentItem.getEnclosure().getUrl();
+            Picasso.with(holder.imageNews.getContext()).load(url).resize(420,280).centerInside().into(holder.imageNews);
+
+        } catch (NullPointerException e) {
+            Log.d("happy4", currentItem.getTitle());
+            Picasso.with(holder.imageNews.getContext()).load(R.drawable.loga_lentaru).resize(420,280).centerInside().into(holder.imageNews);
+        }
+
+        detailItem = currentItem;
         holder.title.setText(currentItem.getTitle());
     }
 
@@ -73,11 +87,21 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
         private final ImageView imageNews;
         private final TextView title;
 
-        public RSSHolder(View itemView) {
+        public RSSHolder(final View itemView) {
             super(itemView);
 
             imageNews = (ImageView) itemView.findViewById(R.id.image_item);
             title = (TextView) itemView.findViewById(R.id.title_item);
+
+            title.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d("intent_out", detailItem.getTitle());
+                    Intent intent = DetailActivity.prepareIntent(context, detailItem);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }

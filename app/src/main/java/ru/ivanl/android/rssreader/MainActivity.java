@@ -1,15 +1,11 @@
 package ru.ivanl.android.rssreader;
 
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
-import java.io.IOException;
-import java.nio.channels.Channel;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -17,11 +13,8 @@ import javax.inject.Inject;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import ru.ivanl.android.rssreader.Adapters.RSSAdapter;
 import ru.ivanl.android.rssreader.DI.RSSReaderApplication;
-import ru.ivanl.android.rssreader.RSSParsing.RSSData;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeed;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
 import ru.ivanl.android.rssreader.RSSParsing.RSSService;
@@ -54,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<RSSFeed> call, Response<RSSFeed> response) {
                 rssFeed = response.body();
 
-                Log.d("happy", rssFeed.toString());
+                Log.d("happy1", rssFeed.toString());
 
                 newsItem = rssFeed.getChannel().getFeedItems();
-                Log.d("happy", "Bode size:" + newsItem.size());
-                adapter = new RSSAdapter(newsItem);
+                Log.d("happy2", "Bode size:" + newsItem.size());
+                adapter = new RSSAdapter(newsItem, getApplicationContext());
 
                 recyclerView.setAdapter(adapter);
 
@@ -66,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RSSFeed> call, Throwable t) {
-                Log.d("happy", t.getMessage());
+                Log.d("happy3", t.getMessage());
             }
         });
 
