@@ -11,11 +11,12 @@ import android.widget.TextView;
 import com.squareup.picasso.Picasso;
 
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
+import ru.ivanl.android.rssreader.Views.INewsItemView;
 
 /**
  * Created by Ivan on 22.05.2016.
  */
-public class DetailActivity extends AppCompatActivity {
+public class DetailActivity extends AppCompatActivity implements INewsItemView {
 
     private static final String INTENT_GUID = "guid";
     private ImageView imageNews;

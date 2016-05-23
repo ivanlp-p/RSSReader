@@ -19,8 +19,9 @@ import ru.ivanl.android.rssreader.DI.RSSReaderApplication;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeed;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
 import ru.ivanl.android.rssreader.RSSParsing.RSSService;
+import ru.ivanl.android.rssreader.Views.INewsView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements INewsView{
 
     @Inject
     RSSService rssService;
