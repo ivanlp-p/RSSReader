@@ -33,8 +33,6 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
     private RSSFeedItem detailItem;
     private LayoutInflater inflater;
 
-    String guid;
-
     public RSSAdapter(List<RSSFeedItem> itemList, Context context) {
 
         ((RSSReaderApplication) context.getApplicationContext()).getAppComponent().inject(this);
@@ -53,7 +51,20 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
 
         View view = inflater.inflate(R.layout.rss_news_item, parent, false);
 
-        return new RSSHolder(view);
+        final RSSHolder holder = new RSSHolder(view);
+
+        holder.title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d("intent_out",itemList.get(holder.getAdapterPosition()).getTitle());
+                detailItem = itemList.get(holder.getAdapterPosition());
+                Intent intent = DetailActivity.prepareIntent(context, detailItem);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+
+            }
+        });
+        return holder;
     }
 
     @Override
@@ -66,11 +77,10 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
             Picasso.with(holder.imageNews.getContext()).load(url).resize(420,280).centerInside().into(holder.imageNews);
 
         } catch (NullPointerException e) {
-            Log.d("happy4", currentItem.getTitle());
             Picasso.with(holder.imageNews.getContext()).load(R.drawable.loga_lentaru).resize(420,280).centerInside().into(holder.imageNews);
         }
 
-        detailItem = currentItem;
+
         holder.title.setText(currentItem.getTitle());
     }
 
@@ -93,15 +103,7 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
             imageNews = (ImageView) itemView.findViewById(R.id.image_item);
             title = (TextView) itemView.findViewById(R.id.title_item);
 
-            title.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("intent_out", detailItem.getTitle());
-                    Intent intent = DetailActivity.prepareIntent(context, detailItem);
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                }
-            });
         }
     }
+
 }

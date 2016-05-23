@@ -7,7 +7,9 @@
     <ImageView
         android:id="@+id/detail_imagenews"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:fitsSystemWindows="true"/>
 
     <TextView
         android:id="@+id/detail_item_description"

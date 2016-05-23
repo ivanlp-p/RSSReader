@@ -31,8 +31,6 @@ public class DetailActivity extends AppCompatActivity {
 
         RSSFeedItem detailItem = getIntent().getParcelableExtra(INTENT_GUID);
 
-        Log.d("intent_in", detailItem.getTitle());
-
         try{
             Picasso.with(this).load(detailItem.getEnclosure().getUrl()).into(imageNews);
         } catch (NullPointerException e) {

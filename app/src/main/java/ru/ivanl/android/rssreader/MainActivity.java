@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.util.Log;
 
 import java.util.List;
@@ -47,10 +48,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<RSSFeed> call, Response<RSSFeed> response) {
                 rssFeed = response.body();
 
-                Log.d("happy1", rssFeed.toString());
-
                 newsItem = rssFeed.getChannel().getFeedItems();
-                Log.d("happy2", "Bode size:" + newsItem.size());
                 adapter = new RSSAdapter(newsItem, getApplicationContext());
 
                 recyclerView.setAdapter(adapter);
@@ -59,14 +57,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<RSSFeed> call, Throwable t) {
-                Log.d("happy3", t.getMessage());
+                Log.d("error", t.getMessage());
             }
         });
-
-
-
-
-
 
     }
 
