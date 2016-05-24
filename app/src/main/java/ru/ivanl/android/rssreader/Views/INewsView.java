@@ -7,4 +7,5 @@ import ru.ivanl.android.rssreader.Adapters.RSSAdapter;
  */
 public interface INewsView {
     void setAdapter(RSSAdapter adapter);
+
 }

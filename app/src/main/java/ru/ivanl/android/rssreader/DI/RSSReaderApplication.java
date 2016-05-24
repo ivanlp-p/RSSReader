@@ -1,7 +1,6 @@
 package ru.ivanl.android.rssreader.DI;
 
 import android.app.Application;
-
 import ru.ivanl.android.rssreader.Views.INewsView;
 
 /**
@@ -26,4 +25,6 @@ public class RSSReaderApplication extends Application {
     public AppComponent getAppComponent() {
         return appComponent;
     }
+
+
 }

@@ -33,10 +33,8 @@ public class NewsPresenter implements INewsPresenter {
        this.newsView = newsView;
     }
 
-
     @Override
     public void callResponce() {
-
         Call<RSSFeed> call = rssService.getRSSData();
         call.enqueue(new Callback<RSSFeed>() {
             @Override
@@ -46,7 +44,6 @@ public class NewsPresenter implements INewsPresenter {
                 List<RSSFeedItem> newsItem = rssFeed.getChannel().getFeedItems();
                 RSSAdapter adapter = new RSSAdapter(newsItem, context.getApplicationContext());
 
-                //recyclerView.setAdapter(adapter);
                 newsView.setAdapter(adapter);
 
             }
