@@ -16,6 +16,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.ivanl.android.rssreader.Adapters.RSSAdapter;
 import ru.ivanl.android.rssreader.DI.RSSReaderApplication;
+import ru.ivanl.android.rssreader.Presenters.NewsPresenter;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeed;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
 import ru.ivanl.android.rssreader.RSSParsing.RSSService;
@@ -24,7 +25,7 @@ import ru.ivanl.android.rssreader.Views.INewsView;
 public class MainActivity extends AppCompatActivity implements INewsView{
 
     @Inject
-    RSSService rssService;
+    NewsPresenter newsPresenter;
 
     private RecyclerView recyclerView;
     private List<RSSFeedItem> newsItem;
@@ -42,8 +43,11 @@ public class MainActivity extends AppCompatActivity implements INewsView{
 
         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
 
+       // newsPresenter = new NewsPresenter(this, getApplicationContext());
+        newsPresenter.callResponce();
 
-        Call<RSSFeed> call = rssService.getRSSData();
+
+       /* Call<RSSFeed> call = rssService.getRSSData();
         call.enqueue(new Callback<RSSFeed>() {
             @Override
             public void onResponse(Call<RSSFeed> call, Response<RSSFeed> response) {
@@ -60,10 +64,14 @@ public class MainActivity extends AppCompatActivity implements INewsView{
             public void onFailure(Call<RSSFeed> call, Throwable t) {
                 Log.d("error", t.getMessage());
             }
-        });
+        });*/
 
     }
 
+    @Override
+    public void setAdapter(RSSAdapter adapter) {
+        recyclerView.setAdapter(adapter);
+    }
 }
 
 
