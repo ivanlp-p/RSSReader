@@ -18,6 +18,7 @@ import javax.inject.Inject;
 
 import ru.ivanl.android.rssreader.DI.RSSReaderApplication;
 import ru.ivanl.android.rssreader.DetailActivity;
+import ru.ivanl.android.rssreader.Presenters.NewsItemPresenter;
 import ru.ivanl.android.rssreader.R;
 import ru.ivanl.android.rssreader.RSSParsing.RSSFeedItem;
 
@@ -58,7 +59,7 @@ public class RSSAdapter extends RecyclerView.Adapter<RSSAdapter.RSSHolder> {
             public void onClick(View v) {
                 Log.d("intent_out",itemList.get(holder.getAdapterPosition()).getTitle());
                 detailItem = itemList.get(holder.getAdapterPosition());
-                Intent intent = DetailActivity.prepareIntent(context, detailItem);
+                Intent intent = NewsItemPresenter.prepareIntent(context, detailItem);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 

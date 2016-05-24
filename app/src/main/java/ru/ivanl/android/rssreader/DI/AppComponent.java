@@ -5,6 +5,7 @@ import javax.inject.Singleton;
 import dagger.Component;
 import ru.ivanl.android.rssreader.Adapters.RSSAdapter;
 import ru.ivanl.android.rssreader.MainActivity;
+import ru.ivanl.android.rssreader.Presenters.NewsPresenter;
 
 
 /**
@@ -15,5 +16,6 @@ import ru.ivanl.android.rssreader.MainActivity;
 public interface AppComponent {
     void inject(MainActivity obj);
     void inject(RSSAdapter obj);
+    void inject(NewsPresenter obj);
 
 }
